@@ -382,15 +382,6 @@ redis_parse_req(struct msg *r)
         case SW_NARG:
             if (r->token == NULL) {
                 if (ch != '*') {
-                    if (str4icmp(p, 'q', 'u', 'i', 't')) {
-                        r->noforward = 1;
-                        r->quit = 1; // don't send a response
-                        r->type = MSG_REQ_REDIS_QUIT;
-                        r->narg = 0;
-                        p += 5;
-                        state = SW_REQ_TYPE_LF;
-                        goto done;
-                    }
                     goto error;
                 }
                 r->token = p;
